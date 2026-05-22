@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vishal V – Finance & Operations Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #faf8f4;
+    --warm-gray: #f0ede7;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --white: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+ 
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(13,27,62,0.97); backdrop-filter: blur(10px);
+    padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gold); font-weight: 700; letter-spacing: 1px; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+ 
+  /* HERO */
+  #hero {
+    min-height: 100vh; background: var(--navy);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-line {
+    position: absolute; right: 0; top: 0; width: 55%; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(201,168,76,0.06) 100%);
+    border-left: 1px solid rgba(201,168,76,0.15);
+  }
+  .hero-content { max-width: 700px; animation: fadeUp 0.9s ease both; }
+  .hero-badge {
+    display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold); font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 2px; margin-bottom: 1.5rem;
+  }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; color: var(--white); line-height: 1.05; margin-bottom: 0.5rem; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 2.5vw, 1.6rem); color: var(--gold); font-weight: 400; margin-bottom: 1.5rem; letter-spacing: 0.5px; }
+  .hero-desc { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.8; max-width: 560px; margin-bottom: 2.5rem; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy); padding: 14px 32px; font-weight: 700;
+    font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    border-radius: 2px; transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 14px 32px;
+    font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    border-radius: 2px; transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .hero-stats {
+    position: absolute; bottom: 60px; right: 5%; display: flex; gap: 3rem;
+    animation: fadeUp 1.1s 0.3s ease both;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Poppins', serif; font-size: 2.5rem; color: var(--gold); font-weight: 700; line-height: 1; }
+  .stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; }
+ 
+  /* SECTION BASE */
+  section { padding: 90px 5%; }
+  .section-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--navy); margin-bottom: 3rem; }
+  .section-title span { color: var(--gold); }
+ 
+  /* ABOUT */
+  #about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-text p { color: var(--muted); font-size: 1rem; line-height: 1.9; margin-bottom: 1.2rem; }
+  .about-highlight { border-left: 3px solid var(--gold); padding-left: 1.5rem; margin: 2rem 0; }
+  .about-highlight p { color: var(--navy); font-style: italic; font-size: 1.05rem; }
+  .about-card {
+    background: var(--navy); border-radius: 4px; padding: 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .about-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+  .about-card h3 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.2rem; margin-bottom: 1.5rem; }
+  .card-items { display: flex; flex-direction: column; gap: 1rem; }
+  .card-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .card-icon { color: var(--gold); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+  .card-item-text strong { display: block; color: var(--white); font-size: 0.9rem; }
+  .card-item-text span { color: rgba(255,255,255,0.5); font-size: 0.8rem; }
+ 
+  /* EXPERIENCE */
+  #experience { background: var(--warm-gray); }
+  .exp-list { display: flex; flex-direction: column; gap: 1.5px; }
+  .exp-item {
+    background: var(--white); padding: 2rem 2.5rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .exp-item:hover { transform: translateX(6px); box-shadow: -4px 0 0 var(--gold); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .exp-role { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--navy); }
+  .exp-company { font-size: 0.9rem; color: var(--gold); font-weight: 600; margin-bottom: 0.3rem; }
+  .exp-date { font-size: 0.78rem; color: var(--muted); background: var(--warm-gray); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .exp-bullets { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-bullets li { color: var(--muted); font-size: 0.9rem; line-height: 1.6; padding-left: 1.2rem; position: relative; }
+  .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; top: 3px; }
+ 
+  /* SKILLS */
+  #skills { background: var(--white); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: var(--cream); border: 1px solid rgba(0,0,0,0.07); padding: 1.8rem; border-radius: 4px; transition: border-color 0.2s, transform 0.2s; }
+  .skill-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .skill-cat { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.8rem; }
+  .skill-name { font-weight: 600; color: var(--navy); font-size: 0.95rem; margin-bottom: 0.6rem; }
+  .skill-bar { height: 3px; background: #e5e7eb; border-radius: 2px; }
+  .skill-bar-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width 1s ease; }
+ 
+  /* EDUCATION */
+  #education { background: var(--navy); }
+  #education .section-title { color: var(--white); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .edu-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); padding: 2rem; border-radius: 4px; transition: border-color 0.2s; }
+  .edu-card:hover { border-color: var(--gold); }
+  .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); font-weight: 700; margin-bottom: 0.4rem; }
+  .edu-uni { color: rgba(255,255,255,0.8); font-weight: 500; margin-bottom: 0.3rem; }
+  .edu-year { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+  .edu-badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-size: 0.75rem; padding: 3px 10px; border-radius: 2px; margin-top: 0.8rem; }
+ 
+  /* WORKSHOPS */
+  #workshops { background: var(--cream); }
+  .workshop-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .workshop-item { background: var(--white); padding: 1.5rem; border-left: 3px solid var(--gold); font-size: 0.9rem; color: var(--text); font-weight: 500; }
+ 
+  /* CONTACT */
+  #contact { background: var(--navy); text-align: center; padding: 80px 5%; }
+  #contact .section-title { color: var(--white); }
+  .contact-email { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gold); text-decoration: none; display: block; margin-bottom: 2rem; }
+  .contact-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link { color: rgba(255,255,255,0.6); font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
+  .contact-link:hover { color: var(--gold); }
+ 
+  /* FOOTER */
+  footer { background: #080f22; text-align: center; padding: 1.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+ 
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+ 
+  @media (max-width: 768px) {
+    .about-grid, .edu-grid { grid-template-columns: 1fr; }
+    .hero-stats { position: static; margin-top: 3rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+ 
+<nav>
+      <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+ 
+<section id="hero">
+  <div class="hero-bg-line"></div>
+  <div class="hero-content">
+    <div class="hero-badge">MBA Finance & Operations</div>
+    <h1 class="hero-name">Vishal V</h1>
+    <p class="hero-title">Finance & Operations Professional</p>
+    <p class="hero-desc">Results-oriented MBA candidate with expertise in SAP FICO, financial reporting, and operations management. Certified in SAP Finance & Controlling with proven ability to drive process optimization and business growth.</p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-primary">View Experience</a>
+      <a href="mailto:visuu6543@gmail.com" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Internships</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">8.03</div>
+      <div class="stat-label">B.Com CGPA</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">SAP</div>
+      <div class="stat-label">Certified</div>
+    </div>
+  </div>
+</section>
+ 
+<section id="about">
+  <h2 class="section-title">About <span>Me</span></h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I am an MBA student specializing in Finance & Operations at Sathyabama University, Chennai. With a strong foundation built during my B.Com at Jamal Mohammed College (CGPA: 8.03), I have consistently pursued excellence in financial analysis and operational efficiency.</p>
+      <p>My hands-on experience spans manufacturing giants like TNPL, the automotive sector at Lear Automotive India, and hands-on accounting at Chennai Metals — giving me a multidimensional view of finance in action.</p>
+      <div class="about-highlight"><p>"I bridge analytical precision with operational insight to deliver measurable financial outcomes."</p></div>
+      <p>I am seeking an entry-level finance or operations role where I can apply my SAP FICO certification, Power BI skills, and process-optimization mindset to drive real organizational impact.</p>
+    </div>
+    <div class="about-card">
+      <h3>Core Information</h3>
+      <div class="card-items">
+        <div class="card-item">
+          <div class="card-icon">📍</div>
+          <div class="card-item-text"><strong>Location</strong><span>Chennai, Tamil Nadu</span></div>
+        </div>
+        <div class="card-item">
+          <div class="card-icon">📧</div>
+          <div class="card-item-text"><strong>Email</strong><span>visuu6543@gmail.com</span></div>
+        </div>
+        <div class="card-item">
+          <div class="card-icon">📱</div>
+          <div class="card-item-text"><strong>Phone</strong><span>+91 6374403254</span></div>
+        </div>
+        <div class="card-item">
+          <div class="card-icon">🎓</div>
+          <div class="card-item-text"><strong>MBA</strong><span>Finance & Operations, 2024–Present</span></div>
+        </div>
+        <div class="card-item">
+          <div class="card-icon">✅</div>
+          <div class="card-item-text"><strong>SAP FICO</strong><span>Certified Professional</span></div>
+        </div>
+        <div class="card-item">
+          <div class="card-icon">💼</div>
+          <div class="card-item-text"><strong>Status</strong><span>Open to Full-time Roles</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="experience">
+  <div class="section-label">Career Journey</div>
+  <h2 class="section-title">Work <span>Experience</span></h2>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Finance Intern</div>
+          <div class="exp-company">Tamil Nadu Newsprint & Papers Ltd (TNPL)</div>
+        </div>
+        <div class="exp-date">Sep 2025 – Oct 2025</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Executed journal entries, bank reconciliation, and monthly closing activities for a large-scale manufacturing enterprise</li>
+        <li>Supported preparation of financial statements and variance analysis reports, improving reporting accuracy</li>
+        <li>Gained end-to-end exposure to accounts payable/receivable processes in a high-volume production environment</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Operations Intern</div>
+          <div class="exp-company">Lear Automotive India Pvt. Ltd., Chennai</div>
+        </div>
+        <div class="exp-date">Jan 2026 – Mar 2026</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Monitored production schedules and supply chain workflows, supporting on-time delivery targets</li>
+        <li>Collected and analyzed operational efficiency metrics; prepared data-driven reports for team review</li>
+        <li>Identified and documented process improvement opportunities across the assembly line</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Assistant Supervisor – Finance</div>
+          <div class="exp-company">Chennai Metals, Mayiladuthurai</div>
+        </div>
+        <div class="exp-date">Prior Experience</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Managed full-cycle accounts: invoicing, GST filing, payroll processing — all via Tally ERP</li>
+        <li>Maintained detailed ledger records ensuring accurate inventory and billing documentation</li>
+        <li>Coordinated vendor and supplier payment reconciliation, reducing payment delays</li>
+      </ul>
+    </div>
+  </div>
+</section>
+ 
+<section id="skills">
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title">Skills & <span>Expertise</span></h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">ERP & Systems</div>
+      <div class="skill-name">SAP FICO</div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Accounting Software</div>
+      <div class="skill-name">Tally ERP 9 & Advance</div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Data & Analytics</div>
+      <div class="skill-name">Microsoft Power BI</div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Spreadsheet</div>
+      <div class="skill-name">Microsoft Excel (Advanced)</div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Compliance</div>
+      <div class="skill-name">GST & Taxation</div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Reporting</div>
+      <div class="skill-name">Financial Modeling</div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width:78%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Operations</div>
+      <div class="skill-name">Inventory Management</div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width:70%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Design</div>
+      <div class="skill-name">Adobe Photoshop</div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+    </div>
+  </div>
+</section>
+ 
+<section id="education">
+  <div class="section-label">Academic Background</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">MBA – Finance & Operations</div>
+      <div class="edu-uni">Sathyabama University, Chennai</div>
+      <div class="edu-year">2024 – 2026</div>
+      <div class="edu-badge">CGPA: 8.1</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.Com – General</div>
+      <div class="edu-uni">Jamal Mohammed College</div>
+      <div class="edu-year">2021 – 2024</div>
+      <div class="edu-badge">CGPA: 8.03</div>
+    </div>
+  </div>
+</section>
+ 
+<section id="workshops">
+  <div class="section-label">Continuous Learning</div>
+  <h2 class="section-title">Workshops & <span>Training</span></h2>
+  <div class="workshop-list">
+    <div class="workshop-item">Inter-College Workshop on Effective Share Market Trading Strategies</div>
+    <div class="workshop-item">45-Day Workshop on Social Entrepreneurship – Sathyabama University</div>
+    <div class="workshop-item">Logistics Literacy Program – Logistics Sector Skill Council</div>
+    <div class="workshop-item">Logistics Management Workshop</div>
+  </div>
+</section>
+ 
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Let's <span>Connect</span></h2>
+  <a href="mailto:visuu6543@gmail.com" class="contact-email">visuu6543@gmail.com</a>
+  <div class="contact-links">
+    <a href="tel:+916374403254" class="contact-link">📱 +91 6374403254</a>
+    <a href="https://www.linkedin.com/in/vishal-v-b90100361" class="contact-link" target="_blank">🔗 LinkedIn Profile</a>
+    <a href="#" class="contact-link">📍 Chennai, Tamil Nadu</a>
+  </div>
+</section>
+ 
+<footer>© 2026 Vishal V — MBA Finance & Operations | Chennai, Tamil Nadu</footer>
+ 
+</body>
+</html>
