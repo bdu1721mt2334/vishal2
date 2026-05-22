@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vishal V | Finance Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #050b12;
+    --surface: #0d1a24;
+    --card: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+    --emerald: #10d982;
+    --emerald-dim: rgba(16,217,130,0.12);
+    --cyan: #00c4cc;
+    --text: #e8f4f0;
+    --muted: rgba(232,244,240,0.5);
+    --glow: 0 0 40px rgba(16,217,130,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+  /* Background grid effect */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: linear-gradient(rgba(16,217,130,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(16,217,130,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(5,11,18,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 6%; display: flex; align-items: center; justify-content: space-between; height: 64px;
+  }
+  .nav-brand { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; }
+  .nav-brand span { color: var(--emerald); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: color 0.2s; letter-spacing: 0.3px; }
+  .nav-links a:hover { color: var(--emerald); }
+  .nav-cta { background: var(--emerald); color: #000; font-size: 0.8rem; font-weight: 700; padding: 8px 20px; border-radius: 4px; text-decoration: none; font-family: 'Syne', sans-serif; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 120px 6% 80px;
+    position: relative; overflow: hidden; z-index: 1;
+  }
+  .hero-glow {
+    position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(16,217,130,0.08) 0%, transparent 70%);
+    top: -100px; right: -100px; pointer-events: none;
+  }
+  .hero-inner { max-width: 800px; }
+  .hero-status {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--emerald-dim); border: 1px solid rgba(16,217,130,0.25);
+    padding: 6px 16px; border-radius: 100px; font-size: 0.75rem; color: var(--emerald);
+    font-weight: 500; margin-bottom: 2rem;
+    animation: fadeIn 0.6s ease both;
+  }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .hero-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 800; line-height: 1;
+    margin-bottom: 1.2rem;
+    animation: slideUp 0.7s 0.1s ease both;
+  }
+  .hero-heading .name-em { color: var(--emerald); }
+  .hero-sub {
+    font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 600px;
+    margin-bottom: 2.5rem;
+    animation: slideUp 0.7s 0.2s ease both;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 3rem; animation: slideUp 0.7s 0.3s ease both; }
+  .tag {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--muted); font-size: 0.75rem; padding: 6px 14px; border-radius: 4px;
+    font-weight: 500;
+  }
+  .tag.active { border-color: rgba(16,217,130,0.4); color: var(--emerald); background: var(--emerald-dim); }
+  .hero-actions { display: flex; gap: 1rem; animation: slideUp 0.7s 0.4s ease both; }
+  .btn-green { background: var(--emerald); color: #000; padding: 14px 30px; font-weight: 700; font-family: 'Syne', sans-serif; font-size: 0.9rem; text-decoration: none; border-radius: 6px; }
+  .btn-ghost { border: 1px solid var(--border); color: var(--muted); padding: 14px 30px; font-size: 0.9rem; text-decoration: none; border-radius: 6px; transition: border-color 0.2s; }
+  .btn-ghost:hover { border-color: var(--emerald); color: var(--emerald); }
+
+  /* METRICS BAR */
+  .metrics-bar {
+    position: relative; z-index: 1;
+    background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 2rem 6%; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;
+  }
+  .metric { text-align: center; }
+  .metric-val { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--emerald); }
+  .metric-lbl { font-size: 0.72rem; color: var(--muted); margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* SECTIONS */
+  section { padding: 90px 6%; position: relative; z-index: 1; }
+  .s-label { font-size: 0.7rem; letter-spacing: 3px; color: var(--emerald); font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .s-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 3rem; }
+
+  /* EXPERIENCE */
+  #experience { background: transparent; }
+  .exp-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .exp-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 2rem 2.5rem; border-radius: 8px;
+    position: relative; overflow: hidden;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .exp-card:hover { border-color: rgba(16,217,130,0.35); box-shadow: var(--glow); }
+  .exp-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(to bottom, var(--emerald), var(--cyan));
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .exp-card:hover::before { opacity: 1; }
+  .exp-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+  .exp-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; }
+  .exp-org { color: var(--emerald); font-size: 0.85rem; font-weight: 500; margin-top: 3px; }
+  .exp-period { font-size: 0.75rem; color: var(--muted); background: var(--card); border: 1px solid var(--border); padding: 4px 12px; border-radius: 100px; white-space: nowrap; }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-points li { color: var(--muted); font-size: 0.88rem; line-height: 1.6; display: flex; gap: 0.8rem; }
+  .exp-points li::before { content: '→'; color: var(--emerald); flex-shrink: 0; font-size: 0.85rem; }
+
+  /* SKILLS */
+  #skills { background: var(--surface); }
+  .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .skill-tile {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 1.5rem; border-radius: 8px; cursor: default;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .skill-tile:hover { border-color: rgba(16,217,130,0.4); background: rgba(16,217,130,0.04); }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+  .skill-nm { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .skill-lvl { font-size: 0.75rem; color: var(--emerald); }
+  .skill-dots { display: flex; gap: 4px; margin-top: 0.7rem; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+  .dot.filled { background: var(--emerald); }
+
+  /* EDUCATION */
+  #education { background: transparent; }
+  .edu-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .edu-box {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 2rem; border-radius: 8px; position: relative; overflow: hidden;
+  }
+  .edu-box::after {
+    content: '🎓'; position: absolute; right: 1.5rem; top: 1.5rem;
+    font-size: 2.5rem; opacity: 0.1;
+  }
+  .edu-deg { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 800; color: var(--emerald); margin-bottom: 0.5rem; }
+  .edu-school { font-size: 0.9rem; color: var(--text); margin-bottom: 0.3rem; }
+  .edu-yr { font-size: 0.78rem; color: var(--muted); }
+  .edu-tag { display: inline-block; background: var(--emerald-dim); color: var(--emerald); font-size: 0.72rem; padding: 3px 10px; border-radius: 4px; margin-top: 1rem; }
+
+  /* ACTIVITIES */
+  #activities { background: var(--surface); }
+  .act-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .act-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 1.5rem; border-radius: 8px; text-align: center;
+    transition: border-color 0.2s;
+  }
+  .act-card:hover { border-color: rgba(16,217,130,0.3); }
+  .act-emoji { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+  .act-name { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; }
+
+  /* CONTACT */
+  #contact {
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(16,217,130,0.05) 100%);
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .contact-big { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 0.5rem; }
+  .contact-em { color: var(--emerald); }
+  .contact-sub { color: var(--muted); margin-bottom: 2rem; }
+  .contact-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text); padding: 12px 24px; border-radius: 100px; text-decoration: none;
+    font-size: 0.9rem; margin: 0.5rem; transition: border-color 0.2s;
+  }
+  .contact-pill:hover { border-color: var(--emerald); color: var(--emerald); }
+
+  footer { background: var(--bg); text-align: center; padding: 1.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.15); border-top: 1px solid var(--border); }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    .edu-row { grid-template-columns: 1fr; }
+    .hero-heading { font-size: 3rem; }
+    .nav-links, .nav-cta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:visuu6543@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-status">
+      <span class="status-dot"></span>
+      Available for Full-time Roles
+    </div>
+    <h1 class="hero-heading">
+      Vishal V<br>
+      
+    </h1>
+    <p class="hero-sub">MBA Finance & Operations professional from Sathyabama University. SAP FICO certified with real-world experience across manufacturing, automotive, and trading sectors.</p>
+    <div class="hero-tags">
+      <span class="tag active">SAP FICO Certified</span>
+      <span class="tag active">Power BI</span>
+      <span class="tag">Financial Accounting</span>
+      <span class="tag">GST & Taxation</span>
+      <span class="tag">Tally ERP</span>
+      <span class="tag">Operations Management</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#experience" class="btn-green">View My Work</a>
+      <a href="mailto:visuu6543@gmail.com" class="btn-ghost">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<div class="metrics-bar">
+  <div class="metric"><div class="metric-val">3+</div><div class="metric-lbl">Internships Completed</div></div>
+  <div class="metric"><div class="metric-val">8.03</div><div class="metric-lbl">B.Com CGPA</div></div>
+  <div class="metric"><div class="metric-val">SAP</div><div class="metric-lbl">FICO Certified</div></div>
+  <div class="metric"><div class="metric-val">4+</div><div class="metric-lbl">Workshops Attended</div></div>
+</div>
+
+<section id="experience">
+  <div class="s-label">Work History</div>
+  <h2 class="s-title">Experience</h2>
+  <div class="exp-grid">
+    <div class="exp-card">
+      <div class="exp-top">
+        <div>
+          <div class="exp-title">Finance Intern</div>
+          <div class="exp-org">Tamil Nadu Newsprint & Papers Ltd (TNPL)</div>
+        </div>
+        <div class="exp-period">Sep – Oct 2025</div>
+      </div>
+      <ul class="exp-points">
+        <li>Executed journal entries, bank reconciliation, and monthly closing for a large-scale manufacturing enterprise</li>
+        <li>Prepared financial statements and variance analysis reports supporting senior finance team decisions</li>
+        <li>Developed deep exposure to AP/AR workflows in a high-volume production environment</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top">
+        <div>
+          <div class="exp-title">Operations Intern</div>
+          <div class="exp-org">Lear Automotive India Pvt. Ltd.</div>
+        </div>
+        <div class="exp-period">Jan – Mar 2026</div>
+      </div>
+      <ul class="exp-points">
+        <li>Monitored production schedules and supply chain workflows in a global automotive manufacturing setting</li>
+        <li>Compiled and analyzed operational efficiency metrics; produced reports for management review</li>
+        <li>Identified and documented process improvement opportunities across the assembly line</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top">
+        <div>
+          <div class="exp-title">Assistant Supervisor – Finance</div>
+          <div class="exp-org">Chennai Metals, Mayiladuthurai</div>
+        </div>
+        <div class="exp-period">Prior Role</div>
+      </div>
+      <ul class="exp-points">
+        <li>Managed end-to-end accounts including invoicing, GST filing, and payroll processing via Tally ERP</li>
+        <li>Maintained accurate ledger records, inventory documentation, and billing workflows</li>
+        <li>Coordinated vendor payments, reducing reconciliation discrepancies through systematic follow-ups</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="s-label">Technical Arsenal</div>
+  <h2 class="s-title">Skills</h2>
+  <div class="skills-container">
+    <div class="skill-tile">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-nm">SAP FICO</div>
+      <div class="skill-lvl">Certified • Expert</div>
+      <div class="skill-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+      </div>
+    </div>
+    <div class="skill-tile">
+      <div class="skill-icon">📊</div>
+      <div class="skill-nm">Microsoft Excel</div>
+      <div class="skill-lvl">Advanced</div>
+      <div class="skill-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-tile">
+      <div class="skill-icon">📈</div>
+      <div class="skill-nm">Power BI</div>
+      <div class="skill-lvl">Intermediate</div>
+      <div class="skill-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-tile">
+      <div class="skill-icon">💼</div>
+      <div class="skill-nm">Tally ERP 9</div>
+      <div class="skill-lvl">Advanced</div>
+      <div class="skill-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-tile">
+      <div class="skill-icon">🧾</div>
+      <div class="skill-nm">GST & Taxation</div>
+      <div class="skill-lvl">Proficient</div>
+      <div class="skill-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-tile">
+      <div class="skill-icon">🔢</div>
+      <div class="skill-nm">Financial Modeling</div>
+      <div class="skill-lvl">Intermediate</div>
+      <div class="skill-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-tile">
+      <div class="skill-icon">🏭</div>
+      <div class="skill-nm">Inventory Mgmt</div>
+      <div class="skill-lvl">Proficient</div>
+      <div class="skill-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-tile">
+      <div class="skill-icon">🎨</div>
+      <div class="skill-nm">Adobe Photoshop</div>
+      <div class="skill-lvl">Intermediate</div>
+      <div class="skill-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="s-label">Academic Background</div>
+  <h2 class="s-title">Education</h2>
+  <div class="edu-row">
+    <div class="edu-box">
+      <div class="edu-deg">MBA – Finance & Operations</div>
+      <div class="edu-school">Sathyabama University, Chennai</div>
+      <div class="edu-yr">2024 – 2026</div>
+      <div class="edu-tag">CGPA 8.1 / 10</div>
+    </div>
+    <div class="edu-box">
+      <div class="edu-deg">B.Com – General</div>
+      <div class="edu-school">Jamal Mohammed College</div>
+      <div class="edu-yr">2021 – 2024</div>
+      <div class="edu-tag">CGPA 8.03 / 10</div>
+    </div>
+  </div>
+</section>
+
+<section id="activities">
+  <div class="s-label">Beyond Work</div>
+  <h2 class="s-title">Activities & Leadership</h2>
+  <div class="act-grid">
+    <div class="act-card"><span class="act-emoji">🏆</span><div class="act-name">Vice Manager – General Champions Club</div></div>
+    <div class="act-card"><span class="act-emoji">🚦</span><div class="act-name">Road Safety Walkathon</div></div>
+    <div class="act-card"><span class="act-emoji">🩸</span><div class="act-name">Blood Donation Camp</div></div>
+    <div class="act-card"><span class="act-emoji">🛡️</span><div class="act-name">Special Police Day Participant</div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="s-label">Reach Out</div>
+  <h2 class="contact-big">Let's <span class="contact-em">Talk</span></h2>
+  <p class="contact-sub">Open to finance & operations opportunities across Tamil Nadu and beyond.</p>
+  <div>
+    <a href="mailto:visuu6543@gmail.com" class="contact-pill">✉️ visuu6543@gmail.com</a>
+    <a href="tel:+916374403254" class="contact-pill">📱 +91 6374403254</a>
+    <a href="https://www.linkedin.com/in/vishal-v-b90100361" class="contact-pill" target="_blank">🔗 LinkedIn</a>
+  </div>
+</section>
+
+<footer>© 2026 Vishal V · Chennai, Tamil Nadu · Built with passion for finance</footer>
+</body>
+</html>
